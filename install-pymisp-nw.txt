@@ -1,0 +1,11 @@
+yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+yum install python-pip
+OWB_FORCE_FIPS_MODE_OFF=1 python
+OWB_FORCE_FIPS_MODE_OFF=1 pip install pymisp
+OWB_FORCE_FIPS_MODE_OFF=1 pip install --upgrade pip
+OWB_FORCE_FIPS_MODE_OFF=1 ./get-misp.py
+yum repolist
+vi /etc/yum.repos.d/epel.repo
+change enabled from 1 to 0
+
+23 3 * * * OWB_FORCE_FIPS_MODE_OFF=1 /root/rsa-misp/get-misp.py > /var/lib/netwitness/common/repo/misp-ip-dst.csv
